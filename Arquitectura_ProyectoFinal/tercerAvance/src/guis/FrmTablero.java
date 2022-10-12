@@ -6,6 +6,8 @@
 package guis;
 
 import java.awt.BorderLayout;
+import java.awt.Graphics;
+import tablero.Tablero;
 
 /**
  *
@@ -18,12 +20,14 @@ public class FrmTablero extends javax.swing.JFrame {
      */
     public FrmTablero() {
        initComponents();
-        PanelFondo panelFondo = new PanelFondo();
-       
-        this.add(panelFondo, BorderLayout.CENTER);
-        this.pack();
     }
 
+    public void paint(Graphics g){
+        super.paint(g);
+        Tablero tbl = new Tablero(7);
+        tbl.dibujar(g);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,11 +43,11 @@ public class FrmTablero extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 1159, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 818, Short.MAX_VALUE)
         );
 
         pack();
