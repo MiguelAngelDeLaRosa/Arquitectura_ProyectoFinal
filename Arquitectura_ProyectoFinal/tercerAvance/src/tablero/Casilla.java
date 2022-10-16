@@ -16,6 +16,7 @@ import java.awt.geom.Arc2D;
  */
 public class Casilla implements Graphic {
 
+    private int numeroCasilla;
     //Coordenadas de los ejes en donde se va a dibujar la casilla.
     private int x;
     private int y;
@@ -36,9 +37,10 @@ public class Casilla implements Graphic {
      * @param y coordenada en el eje de las Y en donde se va a iniciar el dibujo
      * de la casilla.
      * @param tipoCasilla identificador del tipo de casilla que se va a crear. 
-     * 1 = casilla central. 2 = casilla cuadrada. 3 = casilla triangular. 4 = casilla redonda.
+     * 1 = casilla central. 2 = casilla cuadrada. 3 = casilla cuadrada con castigo. 4 = casilla redonda. 5 = casilla triangular.
      */
-    public Casilla(int x, int y, int tipoCasilla) {
+    public Casilla(int numeroCasilla, int x, int y, int tipoCasilla) {
+        this.numeroCasilla = numeroCasilla;
         this.x = x;
         this.y = y;
         this.xT = null;
@@ -53,7 +55,7 @@ public class Casilla implements Graphic {
      * @param xT arreglo con las coordenadas en x para dibujar el triángulo.
      * @param yT arreglo con las coordenadas en y para dibujar el triángulo
      * @param tipoCasilla identificador del tipo de casilla que se va a crear. 
-     * 1 = casilla central. 2 = casilla cuadrada. 3 = casilla triangular. 4 = casilla redonda.
+     * 1 = casilla central. 2 = casilla cuadrada. 3 = casilla cuadrada con castigo. 4 = casilla redonda. 5 = casilla triangular.
      */
     public Casilla(int[] xT, int[] yT, int tipoCasilla) {
         this.xT = xT;
@@ -70,9 +72,10 @@ public class Casilla implements Graphic {
      * @param anguloInicial valor en donde se va a iniciar a dibujar el ángulo.
      * @param anguloFinal valor del ángulo.
      * @param tipoCasilla identificador del tipo de casilla que se va a crear. 
-     * 1 = casilla central. 2 = casilla cuadrada. 3 = casilla triangular. 4 = casilla redonda.
+     * 1 = casilla central. 2 = casilla cuadrada. 3 = casilla cuadrada con castigo. 4 = casilla redonda. 5 = casilla triangular.
      */
-    public Casilla(int x, int y, double anguloInicial, double anguloFinal, int tipoCasilla) {
+    public Casilla(int numeroCasilla, int x, int y, double anguloInicial, double anguloFinal, int tipoCasilla) {
+        this.numeroCasilla = numeroCasilla;
         this.x = x;
         this.y = y;
         this.anguloInicial = anguloInicial;
@@ -88,14 +91,14 @@ public class Casilla implements Graphic {
      */
     @Override
     public void dibujar(Graphics g) {
-        if (tipoCasilla == 1 || tipoCasilla == 2) {
+        if (tipoCasilla == 1 || tipoCasilla == 2 || tipoCasilla == 3) {
             casillaCuadrada(g);
-        }
-        if (tipoCasilla == 3) {
-            casillaTriangular(g);
         }
         if (tipoCasilla == 4) {
             casillaCircular(g);
+        }
+        if (tipoCasilla == 5) {
+            casillaTriangular(g);
         }
     }
 
@@ -106,7 +109,9 @@ public class Casilla implements Graphic {
      */
     public void casillaCuadrada(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        g2.setStroke(new BasicStroke(5.0f));
+        g2.setColor(Color.white);
+        g2.fillRect(x, y, 50, 50);
+        g2.setStroke(new BasicStroke(2.0f));
         g2.setColor(Color.black);
         g2.drawRect(x, y, 50, 50);
     }
@@ -118,9 +123,9 @@ public class Casilla implements Graphic {
      */
     public void casillaTriangular(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        g2.setColor(new Color(188, 156, 37));
+        g2.setColor(Color.RED);
         g2.fillPolygon(xT, yT, 3);
-        g2.setColor(Color.black);
+
     }
 
     /**
@@ -130,8 +135,19 @@ public class Casilla implements Graphic {
      */
     public void casillaCircular(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        g2.setStroke(new BasicStroke(5.0f));
+        g2.setStroke(new BasicStroke(2.0f));
+        g2.setColor(new Color(188, 156, 37));
+        g2.fill(new Arc2D.Double(x, y, 100, 100, anguloInicial, anguloFinal, Arc2D.PIE));
+        g2.setColor(Color.black);
         g2.draw(new Arc2D.Double(x, y, 100, 100, anguloInicial, anguloFinal, Arc2D.PIE));
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 
 }

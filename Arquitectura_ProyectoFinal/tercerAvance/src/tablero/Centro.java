@@ -15,6 +15,33 @@ import java.util.List;
 public class Centro implements Graphic {
 
     private List<Graphic> casillasCentrales;
+    private int casillaSuperiorDerecha;
+    private int casillaSuperiorIzquierda;
+    private int casillaInferiorIzquierda;
+    private int casillaInferiorDerecha;
+
+    public Centro(int numCasillas) {
+        if (numCasillas == 5) {
+            this.casillaSuperiorDerecha = 1;
+            this.casillaSuperiorIzquierda = 12;
+            this.casillaInferiorIzquierda = 23;
+            this.casillaInferiorDerecha = 34;
+        }
+
+        if (numCasillas == 6) {
+            this.casillaSuperiorDerecha = 1;
+            this.casillaSuperiorIzquierda = 14;
+            this.casillaInferiorIzquierda = 27;
+            this.casillaInferiorDerecha = 40;
+        }
+
+        if (numCasillas == 7) {
+            this.casillaSuperiorDerecha = 1;
+            this.casillaSuperiorIzquierda = 16;
+            this.casillaInferiorIzquierda = 31;
+            this.casillaInferiorDerecha = 46;
+        }
+    }
 
     /**
      * Método obligatorio que utiliza el panel para dibujar un componente.
@@ -34,10 +61,10 @@ public class Centro implements Graphic {
     @Override
     public void dibujar(Graphics g) {
         casillasCentrales = new ArrayList<Graphic>();
-        casillasCentrales.add(new Casilla(430, 460, 1));
-        casillasCentrales.add(new Casilla(430, 410, 1));
-        casillasCentrales.add(new Casilla(480, 460, 1));
-        casillasCentrales.add(new Casilla(480, 410, 1));
+        casillasCentrales.add(new Casilla(casillaSuperiorDerecha, 480, 410, 1));
+        casillasCentrales.add(new Casilla(casillaSuperiorIzquierda, 430, 410, 1));
+        casillasCentrales.add(new Casilla(casillaInferiorIzquierda, 430, 460, 1));
+        casillasCentrales.add(new Casilla(casillaInferiorDerecha, 480, 460, 1));
 
         for (Graphic casilla : casillasCentrales) {
             casilla.dibujar(g);

@@ -14,11 +14,15 @@ import javax.swing.JPanel;
  *
  * @author edw_v
  */
-public class Tablero implements Graphic {
+public class Tablero extends JPanel implements Graphic {
 
     private int numCasillas;
     //El tablero contiene una lista<Graphic> que son las aspas y el centro.
     private List<Graphic> listaGraficos;
+    int contadorSuperior;
+    int contadorInferior;
+    int contadorIzquierdo;
+    int contadorDerecho;
 
     /**
      * Constructor que inicializa los atributos de la clase al valor de los
@@ -29,12 +33,34 @@ public class Tablero implements Graphic {
      */
     public Tablero(int numCasillas) {
         this.numCasillas = numCasillas;
+        
+        if(numCasillas == 5){
+            this.contadorSuperior = 2;
+            this.contadorIzquierdo = 13;
+            this.contadorInferior = 24;
+            this.contadorDerecho = 35;
+        }
+        
+        if(numCasillas == 6){
+            this.contadorSuperior = 2;
+            this.contadorIzquierdo = 15;
+            this.contadorInferior = 28;
+            this.contadorDerecho = 41;
+        }
+        
+        if(numCasillas == 7){
+            this.contadorSuperior = 2;
+            this.contadorIzquierdo = 17;
+            this.contadorInferior = 32;
+            this.contadorDerecho = 47;
+        }
+        
         listaGraficos = new ArrayList<>();
-        listaGraficos.add(new Centro());
-        listaGraficos.add(new Aspa(480, 360, numCasillas, "superior"));
-        listaGraficos.add(new Aspa(480, 510, numCasillas, "inferior"));
-        listaGraficos.add(new Aspa(380, 460, numCasillas, "izquierda"));
-        listaGraficos.add(new Aspa(530, 460, numCasillas, "derecha"));
+        listaGraficos.add(new Centro(numCasillas));
+        listaGraficos.add(new Aspa(contadorSuperior, 480, 360, numCasillas, "superior"));
+        listaGraficos.add(new Aspa(contadorIzquierdo, 380, 410, numCasillas, "izquierda"));
+        listaGraficos.add(new Aspa(contadorInferior, 430, 510, numCasillas, "inferior"));
+        listaGraficos.add(new Aspa(contadorDerecho, 530, 460, numCasillas, "derecha"));
     }
 
     /**
@@ -57,8 +83,15 @@ public class Tablero implements Graphic {
             grafico.dibujar(g);
         }
     }
-
-    //MÉTODO PARA REALIZAR PRUEBAS, DEBEMOS ELIMINAR Y CREAR UN NUEVO FRAME PARA QUE SE CREE EL JPANEL DEL TABLERO
     
+    public static void main(String[] args){
+        JFrame ventana = new JFrame("Tablero");
 
+        Tablero objeto = new Tablero(7);
+        ventana.add(objeto);
+        ventana.setSize(1000, 1200);
+        ventana.setLocationRelativeTo(null);
+        ventana.setVisible(true);
+        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
 }
