@@ -322,7 +322,7 @@ public class Aspa implements Graphic {
         contadorCasillas++;
         auxX -= 50;
 
-        //Ciclo para rear las casillas superiores
+        //Ciclo para crear las casillas superiores
         for (int j = 0; j < numCasillas - 1; j++) {
             //Si las casillas son la primera o la segunda, después de la casilla circular superior
             if (j == 0 || j == 1) {

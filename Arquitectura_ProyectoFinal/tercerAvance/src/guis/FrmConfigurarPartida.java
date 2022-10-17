@@ -4,6 +4,8 @@
  */
 package guis;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author edw_v
@@ -15,8 +17,33 @@ public class FrmConfigurarPartida extends javax.swing.JDialog {
      */
     public FrmConfigurarPartida(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        initComponents();
+
     }
+public boolean validaMonto(java.awt.event.KeyEvent evt) {
+        try {
+            txtPuntosApuesta.getText().trim();
+            if (txtPuntosApuesta.getText().length() >= 7) {
+                float maximo = 9999999;
+                float fondoA = Float.parseFloat(txtPuntosApuesta.getText());
+                if ((fondoA > 0 || fondoA >= maximo)) {
+
+                    JOptionPane.showMessageDialog(null, "Se han validado los datos correctamente");
+                    return true;
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Solo se aceptan números");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "LLene los datos solo con números");
+            return false;
+        }
+        return false;
+
+    }
+
+    private void txtPuntosApuestaKeyTyped(java.awt.event.KeyEvent evt) {                                          
+        validaMonto(evt);
+    }                                         
 
     /**
      * This method is called from within the constructor to initialize the form.

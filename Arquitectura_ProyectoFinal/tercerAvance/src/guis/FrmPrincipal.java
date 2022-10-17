@@ -21,7 +21,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     public FrmPrincipal() {
         initComponents();
         PanelFondo panelFondo = new PanelFondo();
-       
         this.add(panelFondo, BorderLayout.CENTER);
         this.pack();
     }
