@@ -14,19 +14,35 @@ import java.util.Objects;
  */
 public class Jugador implements IJugador {
     
+    private int id;
     private List<Ficha> fichas;
     private double fondos;
     private String nombre;
 
     public Jugador() {
     }
-
+    
+    public Jugador(int id, List<Ficha> fichas, double fondos, String nombre) {
+        this.id = id;
+        this.fichas = fichas;
+        this.fondos = fondos;
+        this.nombre = nombre;
+    }
+    
     public Jugador(List<Ficha> fichas, double fondos, String nombre) {
         this.fichas = fichas;
         this.fondos = fondos;
         this.nombre = nombre;
     }
+    
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public List<Ficha> getFichas() {
         return fichas;
     }
